@@ -303,9 +303,10 @@ struct TimelineView: View {
                             Text(e.what).font(.body(14)).foregroundStyle(passed ? Bib.onNavy3 : Bib.onNavy).strikethrough(passed)
                             Text(e.legName).font(.label(10.5, .bold)).foregroundStyle(Bib.onNavy3)
                         }.padding(.bottom, 14)
+                        Spacer(minLength: 0)
                     }
                 }
-            }.panel()
+            }.frame(maxWidth: .infinity, alignment: .leading).panel()
             let shop = Dictionary(grouping: store.race.legs.flatMap { $0.items }, by: { $0.productID }).compactMap { k, v -> (String, Double)? in store.product(k).map { ($0.name, v.reduce(0) { $0 + $1.count }) } }.sorted { $0.1 > $1.1 }
             VStack(alignment: .leading, spacing: 8) {
                 Eyebrow("Shopping list")
