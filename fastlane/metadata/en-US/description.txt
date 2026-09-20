@@ -1,0 +1,24 @@
+Race Fuel builds your race-day nutrition plan from your own numbers, then reminds you to take every gel.
+
+Race day nutrition fails in the details: the right grams at the right time, from products you have actually trained with. Race Fuel does the arithmetic and carries the plan on the start line.
+
+ATHLETE
+• Sweat rate from a weigh-in test, corrected for race-day heat
+• Sodium loss per hour from your sweat saltiness or a measured value
+• Carb targets from your gut training, bike at the full rate and run at 80%
+• Fluid capped at what a gut absorbs
+
+RACE
+• Presets from sprint triathlon to full iron, marathon, half, century, gran fondo and 50 km trail, or your own legs
+• Per-leg carb, fluid and sodium targets, start time and expected finish
+
+PRODUCTS AND PLAN
+• Your gels, chews, bottles as you mix them, salt capsules, bars, cola and aid-station cups
+• Auto-fill to the targets, then adjust counts per leg with live gauges
+• Caffeine budget against your body weight, shopping list
+
+RACE DAY
+• A timeline of every intake by clock time
+• Tap Start the race on the start line: the race clock runs and a notification fires for each intake
+
+No account, no ads, no tracking. Everything stays on your phone. This is a planning tool, not medical advice; test every plan in training first.

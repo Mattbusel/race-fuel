@@ -1,0 +1,24 @@
+# App Review notes
+
+---
+
+No account, login or network connection is required.
+
+HOW TO USE: The Plan tab shows the fuel plan for the selected race. Athlete holds the sweat test and gut settings; Race picks a preset and legs; Products lists the gels and drinks. Tap Auto-fill on the Plan tab to build the plan, adjust counts with the steppers. Timeline lists every intake; "Start the race" starts the race clock and asks for notification permission to remind the user of each intake. Notifications are optional; the app works without them.
+
+PRIVACY: no data is collected. Everything is stored in a JSON file in the app's Documents folder on the device. Local notifications only.
+
+2. PURPOSE AND TARGET AUDIENCE
+Race Fuel is a race-day nutrition planner for endurance athletes (triathletes, marathon runners, cyclists). It calculates hourly carbohydrate, fluid and sodium targets from the user's own sweat test and gut training, builds a product-by-product plan per race leg, and reminds them of each intake during the race. Adults; rated 4+.
+
+3. SETUP AND ACCESS
+No setup, login or credentials. A default race and product list are present on first launch; tap Auto-fill.
+
+4. EXTERNAL SERVICES, TOOLS AND PLATFORMS
+None. No network requests, analytics, advertising or third-party frameworks. Built with SwiftUI, Foundation and UserNotifications (local only).
+
+5. REGIONAL DIFFERENCES
+None.
+
+6. REGULATED INDUSTRY / PROTECTED MATERIAL
+Not applicable. General sports-nutrition guidance calculated on the device; the app states it is a planning tool, not medical advice. All art, text and code are my own work.
