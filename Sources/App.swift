@@ -18,8 +18,13 @@ struct RaceFuelApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            RootView().environment(store).environment(router).environment(pro).preferredColorScheme(.dark).tint(Bib.orange)
-                .onAppear { router.applyShotArgs(store); Autopilot.shared.run(store, router) }
+            if ProcessInfo.processInfo.arguments.contains("sources") {
+                // `-shot sources`: the citations page on its own, for checking and for App Review.
+                SourcesView().preferredColorScheme(.dark).tint(Bib.orange)
+            } else {
+                RootView().environment(store).environment(router).environment(pro).preferredColorScheme(.dark).tint(Bib.orange)
+                    .onAppear { router.applyShotArgs(store); Autopilot.shared.run(store, router) }
+            }
         }
     }
 }

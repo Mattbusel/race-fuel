@@ -72,6 +72,11 @@ jobs:
           xcrun simctl launch "$udid" com.mattbusel.racefuel -shot paywall
           sleep 8
           xcrun simctl io "$udid" screenshot "iap/paywall.png"
+          # The citations page (guideline 1.4.1), for checking. Not a store screenshot.
+          xcrun simctl terminate "$udid" com.mattbusel.racefuel || true
+          xcrun simctl launch "$udid" com.mattbusel.racefuel -shot sources
+          sleep 6
+          xcrun simctl io "$udid" screenshot "iap/sources.png"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -24,3 +24,6 @@ None.
 
 6. REGULATED INDUSTRY / PROTECTED MATERIAL
 Not applicable. General sports-nutrition guidance calculated on the device; the app states it is a planning tool, not medical advice. All art, text and code are my own work.
+
+7. CITATIONS (Guideline 1.4.1)
+Every block of figures has a SOURCES link directly under it: the per-hour targets on the Plan tab, the caffeine line at the bottom of the Plan tab, the Sweat rate card on the Athlete tab, and the Gut and salt panel on the Athlete tab. Each opens a Sources page listing seven peer-reviewed sources (ACSM position stands on nutrition and on fluid replacement, Jeukendrup on carbohydrate intake and on gut training, Baker on sweat rate and sweat sodium, Sports Dietitians Australia on exercise in the heat, and the ISSN position stand on caffeine), each saying which number it supports and linking to the paper at doi.org. The page ends with a statement that the app is a planning tool, not medical advice.

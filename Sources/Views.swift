@@ -19,6 +19,7 @@ struct PlanView: View {
                     bigStat(String(Int(t.sodium)), "mg sodium", Bib.ink)
                 }
                 Text("Run gets \(Int(store.targets(.run).carb)) g/h. From your sweat test, gut training and \(Int(store.race.temp))° on the day.").font(.body(12.5)).foregroundStyle(Bib.ink2).padding(.top, 8)
+                SourcesLink(light: true).padding(.top, 4)
             }
             HStack(spacing: 10) {
                 miniStat(String(Int(p.carb)), "g carbs", "of \(Int(need.carb))", Bib.lime)
@@ -32,7 +33,8 @@ struct PlanView: View {
             ForEach(Array(store.race.legs.enumerated()), id: \.element.id) { i, leg in
                 LegCard(index: i, leg: leg)
             }
-            Text("Caffeine planned: \(Int(p.caffeine)) mg of \(Int(store.athlete.caffeinePerKg * store.athlete.weight)) mg allowed. Test every product in training first.").font(.body(12.5)).foregroundStyle(Bib.onNavy3)
+            Text("Caffeine planned: \(Int(p.caffeine)) mg of \(Int(store.athlete.caffeinePerKg * store.athlete.weight)) mg allowed. Test every product in training first. A planning tool, not medical advice.").font(.body(12.5)).foregroundStyle(Bib.onNavy3)
+            SourcesLink()
         }
     }
     func bigStat(_ v: String, _ l: String, _ c: Color) -> some View {
@@ -112,6 +114,7 @@ struct AthleteView: View {
                     Text("L / hour").font(.label(13, .black)).foregroundStyle(Bib.ink3)
                 }
                 Text("Losing about \(Int(store.athlete.sweatRate * store.athlete.sweatSodium)) mg of sodium an hour. The plan replaces 80% of the fluid, capped at what a gut absorbs, and most of the sodium.").font(.body(12.5)).foregroundStyle(Bib.ink2).padding(.top, 6)
+                SourcesLink(light: true).padding(.top, 4)
             }
             VStack(spacing: 0) {
                 Eyebrow("Sweat test").frame(maxWidth: .infinity, alignment: .leading).padding(.bottom, 6)
@@ -142,6 +145,7 @@ struct AthleteView: View {
                 }.padding(.vertical, 6)
                 NumField(label: "Measured sodium", hint: "mg/L, optional", value: $store.athlete.sweatSodium)
                 NumField(label: "Caffeine", hint: "mg per kg, 0 to 6", value: $store.athlete.caffeinePerKg, step: 0.5)
+                SourcesLink().frame(maxWidth: .infinity, alignment: .leading).padding(.top, 8)
             }.panel()
             ProCard()
         }
