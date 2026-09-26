@@ -6,6 +6,8 @@ No account, login or network connection is required.
 
 HOW TO USE: The Plan tab shows the fuel plan for the selected race. Athlete holds the sweat test and gut settings; Race picks a preset and legs; Products lists the gels and drinks. Tap Auto-fill on the Plan tab to build the plan, adjust counts with the steppers. Timeline lists every intake; "Start the race" starts the race clock and asks for notification permission to remind the user of each intake. Notifications are optional; the app works without them.
 
+IN-APP PURCHASE: the app is free. One non-consumable, "Race Fuel Pro" (com.mattbusel.racefuel.pro), unlocks race day (the race clock and intake reminders behind "Start the race"), more than 3 of the user's own products, and sharing the plan. Everything else is free. To see the paywall: Timeline tab, tap "Start the race" or "Share the plan". Restore purchase is on the paywall and on the Race Fuel Pro card at the bottom of the Athlete tab. The review recording runs with Pro unlocked so it can show race day.
+
 PRIVACY: no data is collected. Everything is stored in a JSON file in the app's Documents folder on the device. Local notifications only.
 
 2. PURPOSE AND TARGET AUDIENCE
