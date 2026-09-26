@@ -94,9 +94,9 @@ struct SourcesView: View {
                 ForEach(Citation.all) { c in
                     Link(destination: c.url) {
                         VStack(alignment: .leading, spacing: 6) {
-                            Text(c.backs).font(.label(12, .black)).foregroundStyle(Bib.orange)
+                            Text(c.backs).font(.label(12, .black)).foregroundStyle(Bib.orange).multilineTextAlignment(.leading)
                             Text(c.title).font(.body(15)).foregroundStyle(Bib.onNavy).multilineTextAlignment(.leading)
-                            Text("\(c.authors). \(c.journal).").font(.body(12.5)).foregroundStyle(Bib.onNavy3).multilineTextAlignment(.leading)
+                            Text("\(c.authors)\(c.authors.hasSuffix(".") ? "" : "."), \(c.journal).").font(.body(12.5)).foregroundStyle(Bib.onNavy3).multilineTextAlignment(.leading)
                             HStack(spacing: 4) {
                                 Text("doi.org/\(c.doi)").font(.label(11, .semibold))
                                 Image(systemName: "arrow.up.right").font(.system(size: 10, weight: .bold))
