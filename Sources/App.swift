@@ -5,13 +5,20 @@ import UserNotifications
 struct RaceFuelApp: App {
     @State private var store: Store
     @State private var router = Router()
+    @State private var pro: Pro
     init() {
         let a = ProcessInfo.processInfo.arguments
-        _store = State(initialValue: Store(demo: a.contains("-shot") || a.contains("-demoAutoplay")))
+        let demo = a.contains("-shot") || a.contains("-demoAutoplay")
+        _store = State(initialValue: Store(demo: demo))
+        // Screenshots and the review recording never touch StoreKit. The paywall shot shows the free app.
+        let paywallShot = a.firstIndex(of: "-shot").map { $0 + 1 < a.count && a[$0 + 1] == "paywall" } ?? false
+        let p = demo ? Pro(forced: !paywallShot) : Pro()
+        if paywallShot { p.paywall = .raceDay }
+        _pro = State(initialValue: p)
     }
     var body: some Scene {
         WindowGroup {
-            RootView().environment(store).environment(router).preferredColorScheme(.dark).tint(Bib.orange)
+            RootView().environment(store).environment(router).environment(pro).preferredColorScheme(.dark).tint(Bib.orange)
                 .onAppear { router.applyShotArgs(store); Autopilot.shared.run(store, router) }
         }
     }
@@ -42,6 +49,7 @@ final class Router {
         case "race": tab = .race
         case "products": tab = .products
         case "timeline": tab = .timeline
+        case "paywall": tab = .timeline
         case "raceday": tab = .timeline; s.armed = Date.now.addingTimeInterval(-47 * 60); raceDay = true
         default: break
         }
@@ -51,8 +59,10 @@ final class Router {
 struct RootView: View {
     @Environment(Store.self) private var store
     @Environment(Router.self) private var router
+    @Environment(Pro.self) private var pro
     var body: some View {
         @Bindable var router = router
+        @Bindable var pro = pro
         ZStack(alignment: .bottom) {
             NavyBackground()
             Group {
@@ -66,6 +76,7 @@ struct RootView: View {
             }
             BibTabBar(selection: $router.tab).padding(.bottom, 2)
         }
+        .sheet(item: $pro.paywall) { r in PaywallView(reason: r).presentationBackground(Bib.navy) }
     }
 }
 

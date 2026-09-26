@@ -143,6 +143,7 @@ struct AthleteView: View {
                 NumField(label: "Measured sodium", hint: "mg/L, optional", value: $store.athlete.sweatSodium)
                 NumField(label: "Caffeine", hint: "mg per kg, 0 to 6", value: $store.athlete.caffeinePerKg, step: 0.5)
             }.panel()
+            ProCard()
         }
         .onChange(of: store.athlete.weight) { store.save() }.onChange(of: store.athlete.gut) { store.save() }.onChange(of: store.athlete.sweatSodium) { store.save() }
         .onChange(of: store.athlete.testBefore) { store.save() }.onChange(of: store.athlete.testAfter) { store.save() }.onChange(of: store.athlete.testDrank) { store.save() }
@@ -206,12 +207,15 @@ struct RaceView: View {
 
 struct ProductsView: View {
     @Environment(Store.self) private var store
+    @Environment(Pro.self) private var pro
     @State private var editing: Product? = nil
     var body: some View {
         Page {
             PageHeader(eyebrow: "Products", title: "What you carry.")
             HStack(spacing: 8) {
-                GoButton(title: "Add product", icon: "plus") { let p = Product(name: "New product", kind: .gel, carb: 25, sodium: 50, ml: 0, caffeine: 0); store.products.append(p); store.save(); editing = p }
+                GoButton(title: "Add product", icon: "plus") {
+                    guard store.products.count < Store.starterProducts.count + Pro.freeOwnProducts || pro.allow(.products) else { return }
+                    let p = Product(name: "New product", kind: .gel, carb: 25, sodium: 50, ml: 0, caffeine: 0); store.products.append(p); store.save(); editing = p }
                 QuietButton(title: "Defaults") { store.products = Store.starterProducts; store.autoFill() }
             }
             ForEach(store.products) { p in
@@ -259,6 +263,7 @@ struct ProductEditor: View {
 struct TimelineView: View {
     @Environment(Store.self) private var store
     @Environment(Router.self) private var router
+    @Environment(Pro.self) private var pro
     @State private var now = Date.now
     @State private var scheduled: Int? = nil
     private let clock = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -285,10 +290,20 @@ struct TimelineView: View {
                 }
             } else {
                 GoButton(title: "Start the race", icon: "flag.checkered", fill: Bib.lime) {
+                    guard pro.allow(.raceDay) else { return }
                     store.armed = .now; store.save()
                     Task { scheduled = await Notify.schedule(store) }
                 }
-                Text("Starts the race clock now and sets a notification for every intake below. Do it on the start line.").font(.body(12.5)).foregroundStyle(Bib.onNavy3)
+                Text("Starts the race clock now and sets a notification for every intake below. Do it on the start line." + (pro.unlocked ? "" : " Race Fuel Pro.")).font(.body(12.5)).foregroundStyle(Bib.onNavy3)
+            }
+            if pro.unlocked {
+                ShareLink(item: store.planText, subject: Text("Race Fuel plan")) {
+                    HStack(spacing: 6) { Image(systemName: "square.and.arrow.up").font(.system(size: 13, weight: .bold)); Text("SHARE THE PLAN").font(.label(12, .black)).tracking(1.2) }
+                        .foregroundStyle(Bib.onNavy2).padding(.horizontal, 14).padding(.vertical, 10)
+                        .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(Color.white.opacity(0.25), lineWidth: 1.2))
+                }
+            } else {
+                QuietButton(title: "Share the plan", icon: "square.and.arrow.up") { pro.allow(.share) }
             }
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(ev) { e in

@@ -66,8 +66,16 @@ jobs:
           xcrun simctl launch "$udid" com.mattbusel.racefuel -shot raceday
           sleep 7
           xcrun simctl io "$udid" screenshot "shots/05.png"
+          # The IAP review screenshot, not a store screenshot: the free app with the paywall up.
+          mkdir -p iap
+          xcrun simctl terminate "$udid" com.mattbusel.racefuel || true
+          xcrun simctl launch "$udid" com.mattbusel.racefuel -shot paywall
+          sleep 8
+          xcrun simctl io "$udid" screenshot "iap/paywall.png"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: shots
-          path: shots
+          path: |
+            shots
+            iap
